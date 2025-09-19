@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  scum-server:
+    build: .
+    container_name: scum-server
+    environment:
+      - SCUM_PORT=7777
+      - SCUM_MAX_PLAYERS=128
+      - SCUM_NO_BATTLEYE=false
+      - VALIDATE=false
+      - STEAM_APP_ID=3792580
+      - WINEPREFIX=/wineprefix
+      - STEAMCMD_DIR=/mnt/user/appdata/scum-server/steamcmd
+      - SERVER_DIR=/mnt/user/appdata/scum-server
+      - BACKUP_DIR=/mnt/user/appdata/scum-server/backups
+      - UID=99
+      - GID=100
+    ports:
+      - "7777:7777/udp"
+      - "7778:7778/udp"
+      - "7779:7779/udp"
+      - "7777:7777/tcp"
+      - "7779:7779/tcp"
+    volumes:
+      - /mnt/user/appdata/scum-server/steamcmd:/mnt/user/appdata/scum-server/steamcmd
+      - /mnt/user/appdata/scum-server:/mnt/user/appdata/scum-server
+    restart: unless-stopped
