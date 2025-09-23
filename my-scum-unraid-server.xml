@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>scum-windows-server</Name>
+  <Repository>cxsorious/scum-unraid-server</Repository>
+  <Registry>https://hub.docker.com/r/cxsorious/scum-unraid-server/</Registry>
+  <Network>host</Network>
+  <Privileged>false</Privileged>
+  <Support>https://hub.docker.com/r/cxsorious/scum-unraid-server/</Support>
+  <Project>https://store.steampowered.com/app/513710/SCUM/</Project>
+  <Overview>
+    SCUM Windows Dedicated Server รันบน Linux ผ่าน Wine  
+    รองรับ SteamCMD, Backup อัตโนมัติ, Update server, Cron backup ทุกชั่วโมง
+  </Overview>
+  <Category>GameServers:</Category>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+
+  <!-- Paths -->
+  <Config Name="SteamCMD" Target="/serverdata/steamcmd" Default="/mnt/user/appdata/steamcmd" Mode="rw" Description="โฟลเดอร์ SteamCMD ใช้ร่วมกันทุกเกม" Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="ServerFiles" Target="/serverdata/SCUM" Default="/mnt/user/appdata/scum-server/SCUM" Mode="rw" Description="โฟลเดอร์ SCUM Server Files" Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="BackupFolder" Target="/serverdata/backups" Default="/mnt/user/appdata/scum-server/backups" Mode="rw" Description="โฟลเดอร์สำรอง backup" Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="WINEPREFIX" Target="WINEPREFIX" Default="/wineprefix" Mode="" Description="โฟลเดอร์ Wine Prefix" Type="Variable" Display="always" Required="true" Mask="false"/>
+
+  <!-- Environment Variables -->
+  <Config Name="SCUM_PORT" Target="SCUM_PORT" Default="7777" Mode="" Description="Port ของ SCUM Server" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="SCUM_MAX_PLAYERS" Target="SCUM_MAX_PLAYERS" Default="128" Mode="" Description="จำนวนผู้เล่นสูงสุด" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="SCUM_NO_BATTLEYE" Target="SCUM_NO_BATTLEYE" Default="false" Mode="" Description="ปิด/เปิด BattleEye (true/false)" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="VALIDATE" Target="VALIDATE" Default="false" Mode="" Description="ตรวจสอบไฟล์เกมหรือไม่ (true/false)" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="STEAM_APP_ID" Target="STEAM_APP_ID" Default="3792580" Mode="" Description="App ID ของ SCUM บน Steam" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="UID" Target="UID" Default="99" Mode="" Description="User ID สำหรับ Unraid" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="GID" Target="GID" Default="100" Mode="" Description="Group ID สำหรับ Unraid" Type="Variable" Display="always" Required="true" Mask="false"/>
+
+  <!-- Ports -->
+  <Port Name="Game UDP" Target="7777" Default="7777" Mode="udp" Description="SCUM Game Port" Type="Port" Display="always" Required="true" Mask="false"/>
+  <Port Name="Query UDP" Target="7778" Default="7778" Mode="udp" Description="Query Port" Type="Port" Display="always" Required="true" Mask="false"/>
+  <Port Name="RCON UDP" Target="7779" Default="7779" Mode="udp" Description="RCON Port" Type="Port" Display="always" Required="true" Mask="false"/>
+  <Port Name="Game TCP" Target="7777" Default="7777" Mode="tcp" Description="SCUM TCP Port" Type="Port" Display="always" Required="true" Mask="false"/>
+  <Port Name="RCON TCP" Target="7779" Default="7779" Mode="tcp" Description="RCON TCP Port" Type="Port" Display="always" Required="true" Mask="false"/>
+</Container>
